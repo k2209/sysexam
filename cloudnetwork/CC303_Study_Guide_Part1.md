@@ -84,6 +84,15 @@ The **TCP/IP model** was developed by the U.S. Department of Defense (ARPANET). 
 **Network Topology** is the geometric arrangement of how devices (nodes) are connected in a network. It affects performance, reliability, and cost.
 
 ### 1. Mesh Topology
+```mermaid
+graph LR
+    A --- B
+    A --- C
+    A --- D
+    B --- C
+    B --- D
+    C --- D
+```
 - **Every device has a dedicated point-to-point link to every other device**
 - For n devices: **n(n-1)/2** links needed (full mesh)
 - ✅ Robust — fault tolerant, privacy, easy fault identification
@@ -91,6 +100,13 @@ The **TCP/IP model** was developed by the U.S. Department of Defense (ARPANET). 
 - Used in: Backbone connections, military
 
 ### 2. Star Topology
+```mermaid
+graph TD
+    HUB((HUB)) --- A
+    HUB --- B
+    HUB --- C
+    HUB --- D
+```
 - **All devices connect to a central hub/switch**
 - Each device has a dedicated point-to-point link to the hub
 - ✅ Easy to install, add devices, and troubleshoot; one link failure doesn't affect others
@@ -98,6 +114,13 @@ The **TCP/IP model** was developed by the U.S. Department of Defense (ARPANET). 
 - Used in: Modern LANs (Ethernet with switches)
 
 ### 3. Bus Topology
+```mermaid
+graph LR
+    BUS["═══ Backbone Cable ═══"] --- A
+    BUS --- B
+    BUS --- C
+    BUS --- D
+```
 - **All devices attach to a single backbone cable**
 - Uses taps and drop lines to connect devices
 - Signal travels in both directions; terminators at both ends absorb signal
@@ -106,6 +129,13 @@ The **TCP/IP model** was developed by the U.S. Department of Defense (ARPANET). 
 - Used in: Classic Ethernet (10BASE5, 10BASE2)
 
 ### 4. Ring Topology
+```mermaid
+graph LR
+    A --> B
+    B --> C
+    C --> D
+    D --> A
+```
 - **Each device connects to exactly two neighbors, forming a circle**
 - Signal travels in one direction; each device has a repeater
 - A token circulates; a device can send data only when it has the token

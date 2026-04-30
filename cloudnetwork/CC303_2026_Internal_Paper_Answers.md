@@ -14,12 +14,14 @@
 **Network Topology** is the physical or logical arrangement of nodes (devices) and links in a network. It determines how devices communicate and affects performance, reliability, and cost.
 
 ### 1. Mesh Topology
-```
-    A ——— B
-   /|\ / |\
-  / | X  | \
- /  |/ \ |  \
-C ——————— D
+```mermaid
+graph LR
+    A --- B
+    A --- C
+    A --- D
+    B --- C
+    B --- D
+    C --- D
 ```
 - **Every device** has a dedicated point-to-point link to **every other device**.
 - For **n** devices → **n(n−1)/2** links are needed.
@@ -28,12 +30,12 @@ C ——————— D
 - **Use:** Backbone connections, military networks.
 
 ### 2. Star Topology
-```
-     B
-     |
-A —— HUB —— C
-     |
-     D
+```mermaid
+graph TD
+    HUB((HUB)) --- A
+    HUB --- B
+    HUB --- C
+    HUB --- D
 ```
 - All devices connect to a **central hub or switch**.
 - Each device has a **dedicated point-to-point** link to the central node.
@@ -42,10 +44,12 @@ A —— HUB —— C
 - **Use:** Modern Ethernet LANs.
 
 ### 3. Bus Topology
-```
-A       B       C       D
-|       |       |       |
-=============================  (Backbone cable)
+```mermaid
+graph LR
+    BUS["═══ Backbone Cable ═══"] --- A
+    BUS --- B
+    BUS --- C
+    BUS --- D
 ```
 - All devices share a **single backbone cable** with taps and drop lines.
 - Signal travels in both directions; **terminators** at both ends absorb signal.
@@ -54,10 +58,12 @@ A       B       C       D
 - **Use:** Classic Ethernet (10BASE5, 10BASE2).
 
 ### 4. Ring Topology
-```
-    A ——→ B
-    ↑       ↓
-    D ←—— C
+```mermaid
+graph LR
+    A --> B
+    B --> C
+    C --> D
+    D --> A
 ```
 - Each device connects to exactly **two neighbors**, forming a closed loop.
 - Data travels in **one direction** (unidirectional); each device acts as a repeater.
@@ -399,16 +405,14 @@ Error detection identifies whether transmitted data has been corrupted during tr
 
 ### TCP Connection Establishment — Three-Way Handshake:
 
-```
-Client                          Server
-  |                               |
-  |--- SYN (SEQ=x) ------------->|   Step 1: Client sends SYN
-  |                               |
-  |<-- SYN+ACK (SEQ=y, ACK=x+1) -|   Step 2: Server responds with SYN+ACK
-  |                               |
-  |--- ACK (SEQ=x+1, ACK=y+1) -->|   Step 3: Client confirms with ACK
-  |                               |
-  |====== CONNECTION ESTABLISHED ==|
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant S as Server
+    C->>S: SYN (SEQ=x)
+    S->>C: SYN+ACK (SEQ=y, ACK=x+1)
+    C->>S: ACK (SEQ=x+1, ACK=y+1)
+    Note over C,S: CONNECTION ESTABLISHED
 ```
 
 1. **Step 1 (SYN):** Client sends a segment with **SYN=1, ACK=0**, and an initial sequence number (x).
